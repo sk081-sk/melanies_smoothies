@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session -- dont need this line if running directly with streamlit. its needed only for steamlit on snflk (sis)
 from snowflake.snowpark.functions import col
 
 helpful_links = [
@@ -26,7 +26,9 @@ st.write("Choose the fruits you want in your custom Smoothie!")
 name_on_order = st.text_input('Name on Smoothie')
 st.write('The name on your Smoothie will be: ', name_on_order)
 
-session = get_active_session()
+#session = get_active_session()  -- dont need this line if running directly with streamlit. its needed only for steamlit on snflk (sis)
+cnx=st.connection("snowflake")   #-- need this line if running directly with streamlit. its NOT needed only for steamlit on snflk (sis)
+session=cnx.session()            #-- need this line if running directly with streamlit. its NOT needed only for steamlit on snflk (sis)
 # my_dataframe = session.table("smoothies.public.fruit_options")
 my_dataframe = session.table("smoothies.public.fruit_options").select (col('FRUIT_NAME'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
