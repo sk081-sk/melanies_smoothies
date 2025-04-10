@@ -2,6 +2,9 @@
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session -- dont need this line if running directly with streamlit. its needed only for steamlit on snflk (sis)
 from snowflake.snowpark.functions import col
+import requests
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
 helpful_links = [
     "https://docs.streamlit.io",
